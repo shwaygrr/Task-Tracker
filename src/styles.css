@@ -1,1 +1,42 @@
 
+.new-task-form {
+    text-align: center;
+}
+
+.add-task, input {
+    font-size: 30px;
+    padding: 20px;
+}
+
+input {
+    border-radius: 50px 0px 0px 50px;
+    background-color: #dfdede;
+    border-style: none;
+}
+
+input:focus {
+    border: none; /* Change border color when focused */
+    outline: none; /* Remove the default blue outline on focus (optional) */
+    background-color: #ccc;
+    
+  }
+
+.add-task {
+    border-radius: 0px 50px 50px 0px;
+    border: none;
+    background: #ccc;
+    cursor: pointer;
+    color: #095776;
+    font-size: 30px;
+    font-style: bold;
+}
+  
+.add-task:hover {
+    background-color: #095776;
+    transition: .5s;
+    color: #fff
+}
+
+.task-container {
+    text-align: center;
+}

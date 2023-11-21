@@ -1,5 +1,88 @@
+* {
+    color: #545454;
+    font-family: 'Open Sans', sans-serif;
+    /* border: 2px solid black; */
+  }
+
+  body {
+    background-color: #FFF9F4;
+  }
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-bottom: 25px
+  }
+  
+.header-title {
+    font-weight: 800;
+    color: hsl(0, 1%, 37%);
+    font-size: 40px;
+}
+
+.header-view-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px 0 5px;
+    padding: 10px;
+    background-color: #F8E7F1;
+    border-radius: 25px;
+    width: 300px;
+    font-size: 18px
+}
+
+.header-view-dropdown {
+    background-color: white;
+    border-style: none;
+    width: 200px;
+    font-size: 18px;
+    padding: 10px 0;
+}
+
+select, button, input {
+    border: none;
+    font-size: 16px;
+    height: 40px;
+    width: 100%;
+}
+
+select:hover, option:hover {
+    cursor: pointer;
+}
 
 .new-task-form {
+    display: flex;
+    justify-content: space-around;
+    background-color: #FEF2CE;
+    border-radius: 25px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.new-task-label {
+    display: block;
+    margin-bottom: 5px
+}
+
+
+.form-container {
+    width: 30%;
+}
+
+form button {
+    margin-top: 25px;
+    width: 30%;
+    background-color: #A8CBFD;
+    letter-spacing: 1px;
+
+}
+
+form button:hover {
+    background-color: #EAEEF6;
+  }
+/* .new-task-form {
     text-align: center;
 }
 
@@ -15,11 +98,10 @@ input {
 }
 
 input:focus {
-    border: none; /* Change border color when focused */
-    outline: none; /* Remove the default blue outline on focus (optional) */
+    border: none; 
+    outline: none; 
     background-color: #ccc;
-    
-  }
+}
 
 .add-task {
     border-radius: 0px 50px 50px 0px;
@@ -38,5 +120,12 @@ input:focus {
 }
 
 .task-container {
-    text-align: center;
+    margin: 10px 50px auto 50px;
+    padding: 0px;
+    border: solid 1px blue
 }
+
+.tasks {
+    border: solid 5px green;
+
+} */

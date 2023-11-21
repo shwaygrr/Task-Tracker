@@ -1,6 +1,7 @@
 import React, {useState} from "react"
 import ReactDOM from "react-dom"
 import Task from "./Task"
+import DayCard from "./DayCard"
 import "./styles.css"
 
 export default function App() {
@@ -28,13 +29,40 @@ export default function App() {
 
   return (
     <div className="App">
+      <header className="app-nav">
+        <h1 className="header-title">TASK TRACKER</h1>
+        <div className="header-view-container">
+          <label className="view-label" for="filter" >VIEW: </label>
+          <select id="filter" className="header-view-dropdown">
+            <option>ALL TASKS</option>
+            <option>COMPLETED</option>
+            <option>INCOMPLETE</option>
+          </select>
+        </div>
+      </header>
+
       <form className="new-task-form" onSubmit={addTask}>
-        <input placeholder="New Task" name="new-task" onChange={handleChange} value={newTask}></input>
-        <button className="add-task">+</button>
+        <div className="form-container">
+          <label className="new-task-label day" for="day-select">day:</label>
+          <select className="day-select form-input" id="day-select">
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            {/* <option>Saturday</option>
+            <option>SUnday</option> */}
+          </select>
+        </div>
+        <div className="form-container">
+          <label className="new-task-label task" for="new-task">task:</label>
+          <input className="form-input" id="new-task" placeholder="New Task" name="new-task" onChange={handleChange} value={newTask}></input>
+        </div>
+        <button className="add-task">add task</button>
       </form>
-      <div className="tasks">
-        {tasks}
-      </div>
+      <DayCard day={"Monday"} color="blue" tasks={taskList}/>
+
+
     </div>
   );
 }

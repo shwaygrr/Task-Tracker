@@ -33,7 +33,7 @@ export default function App() {
         <h1 className="header-title">TASK TRACKER</h1>
         <div className="header-view-container">
           <label className="view-label" for="filter" >VIEW: </label>
-          <select id="filter" className="header-view-dropdown">
+          <select id="filter" className="header-view-dropdown" name="filter">
             <option>ALL TASKS</option>
             <option>COMPLETED</option>
             <option>INCOMPLETE</option>

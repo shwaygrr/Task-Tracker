@@ -2,6 +2,8 @@
 
 Task Tracker is a basic React project that allows users to manage tasks. Users can add, delete, and mark tasks as completed.
 
+User Interface inspired by https://github.com/turingschool-examples/task-tracker
+
 ## Features
 
 - Task List: Display a list of tasks with their details.

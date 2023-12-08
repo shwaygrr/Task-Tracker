@@ -1,18 +1,23 @@
 import React from "react";
 import ReactDOM from "react";
 
+
 export default function DayCard(props) {
 
-    const styles = {
-        backgroundColor: props.color
+    const dayStyles = {
+        backgroundColor: props.dayBackgroundColor
+    }
+
+    const taskListStyles = {
+        backgroundColor: props.tasksBackgroundcolor
     }
 
     return(
-        <div>
-            <header className="day-title">{props.day}</header>
-            <div className="task-list" style={styles}>
+        <article>
+            <h2 className="day-title" style={dayStyles}>{props.day}</h2>
+            <div className="tasks-list-container" style={taskListStyles}>
                 {props.tasks}
             </div>
-        </div>
+        </article>
     )
 }

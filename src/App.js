@@ -29,6 +29,7 @@ export default function App() {
 
   return (
     <div className="App">
+
       <header className="app-nav">
         <h1 className="header-title">TASK TRACKER</h1>
         <div className="header-view-container">
@@ -60,9 +61,14 @@ export default function App() {
         </div>
         <button className="add-task">add task</button>
       </form>
-      <DayCard day={"Monday"} color="blue" tasks={taskList}/>
-
-
+      
+      <main>
+        <DayCard day={"Monday"} dayBackgroundColor="#F9614E" tasksBackgroundcolor="#FDD3CB" tasks={taskList}/>
+        <DayCard day={"Tuesday"} dayBackgroundColor="#A8CBFD" tasksBackgroundcolor="#EAEEF6" tasks={taskList}/>
+        <DayCard day={"Wednesday"} dayBackgroundColor="#FDD875" tasksBackgroundcolor="#FEF2CE" tasks={taskList}/>
+        <DayCard day={"Thursday"} dayBackgroundColor="#E3AFE8" tasksBackgroundcolor="#F8E7F1" tasks={taskList}/>
+        <DayCard day={"Friday"} dayBackgroundColor="#FF914D" tasksBackgroundcolor="#FFE0CD" tasks={taskList}/>
+      </main>
     </div>
   );
 }

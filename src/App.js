@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import ReactDOM from "react-dom"
-import Task from "./Task"
-import DayCard from "./DayCard"
+import DayCard from "./components/DayCard"
+import TaskCard from "./components/TaskCard"
 import "./styles.css"
 
 export default function App() {
@@ -25,7 +25,7 @@ export default function App() {
     }
   }
 
-  const tasks = taskList.map((task, index) => <Task key={index} id={index+1} task={task}/>)
+  const tasks = taskList.map((task, index) => <TaskCard key={index} id={index+1} task={task}/>)
 
   return (
     <div className="App">
@@ -56,14 +56,14 @@ export default function App() {
           </select>
         </div>
         <div className="form-container">
-          <label className="new-task-label task" for="new-task">task:</label>
+          <label className="new-task-label" for="new-task">task:</label>
           <input className="form-input" id="new-task" placeholder="New Task" name="new-task" onChange={handleChange} value={newTask}></input>
         </div>
         <button className="add-task">add task</button>
       </form>
       
       <main>
-        <DayCard day={"Monday"} dayBackgroundColor="#F9614E" tasksBackgroundcolor="#FDD3CB" tasks={taskList}/>
+        <DayCard day={"Monday"} dayBackgroundColor="#F9614E" tasksBackgroundcolor="#FDD3CB" tasks={tasks}/>
         <DayCard day={"Tuesday"} dayBackgroundColor="#A8CBFD" tasksBackgroundcolor="#EAEEF6" tasks={taskList}/>
         <DayCard day={"Wednesday"} dayBackgroundColor="#FDD875" tasksBackgroundcolor="#FEF2CE" tasks={taskList}/>
         <DayCard day={"Thursday"} dayBackgroundColor="#E3AFE8" tasksBackgroundcolor="#F8E7F1" tasks={taskList}/>

@@ -124,3 +124,19 @@ article {
     align-items: center;
     margin-top: 40px;
 }
+
+.task-card {
+    background-color: white;
+    width: 90%;
+    margin: 10px 0;
+    text-align: center;
+    padding: 15px 0;
+  }
+  
+  .task-card:nth-child(1) {
+    margin-top: 40px;
+  }
+  
+  .task-card p {
+    margin-bottom: 0;
+  }

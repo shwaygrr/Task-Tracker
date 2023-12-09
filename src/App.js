@@ -6,26 +6,55 @@ import "./styles.css"
 
 export default function App() {
 
-  const [taskList, setTaskList] = React.useState([]);
-  const [newTask, setNewTask] = React.useState("");
+  const [newTask, setNewTask] = useState({
+    taskName: "",
+    day: "Monday",
+    isCompleted: false,
+  });
 
-  function handleChange(event) {
-    setNewTask(event.target.value)
+  const [monTaskList, setMonTaskList] = useState([]);
+  const [tuestaskList, setTuesTaskList] = useState([]);
+  const [wedTaskList, setWedTaskList] = useState([]);
+  const [thurTaskList, setThurTaskList] = useState([]);
+  const [friTaskList, setFriTaskList] = React.useState([]);
+
+
+  function handleTaskNameChange(event) {
+    console.log(newTask.day);
+    setNewTask(prevTask => {
+      return {
+        ...prevTask,
+        taskName: event.target.value
+      }
+    })
   }
 
-  function addTask(event) {
-    event.preventDefault(); //enter button work without relaoding
-
-    if (newTask.trim().length == 0){
-      console.log("Empty string");
-    } 
-    else {
-      setTaskList(prevTaskList => [...prevTaskList, newTask]);
-      setNewTask("");
-    }
+  function handleDayChange(event) {
+    setNewTask(prevTask => {
+      return {
+        ...prevTask,
+        day: event.target.value
+      }
+    })
   }
 
-  const tasks = taskList.map((task, index) => <TaskCard key={index} id={index+1} task={task}/>)
+  // function addTask(event) {
+  //   event.preventDefault(); //enter button work without relaoding
+
+  //   if (newTask.trim().length == 0){
+  //     console.log("Empty string");
+  //   } 
+  //   else {
+  //     setTaskList(prevTaskList => [...prevTaskList, newTask]);
+  //     setNewTask("");
+  //   }
+  // }
+
+  // const monTasks = taskList.map((task, index) => task.day == "Monday" && <TaskCard key={index} task={task}/>)
+  // const tuesTasks = taskList.map((task, index) => task.day == "Tuesday" && <TaskCard key={index} task={task}/>)
+  // const wedTasks = taskList.map((task, index) => task.day == "Wednesday" && <TaskCard key={index} task={task}/>)
+  // const thurTasks = taskList.map((task, index) => task.day == "Thursday" && <TaskCard key={index} task={task}/>)
+  // const friTasks = taskList.map((task, index) => task.day == "Friday" && <TaskCard key={index} task={task}/>)
 
   return (
     <div className="App">
@@ -33,7 +62,7 @@ export default function App() {
       <header className="app-nav">
         <h1 className="header-title">TASK TRACKER</h1>
         <div className="header-view-container">
-          <label className="view-label" for="filter" >VIEW: </label>
+          <label className="view-label" htmlFor="filter" >VIEW: </label>
           <select id="filter" className="header-view-dropdown" name="filter">
             <option>ALL TASKS</option>
             <option>COMPLETED</option>
@@ -42,11 +71,11 @@ export default function App() {
         </div>
       </header>
 
-      <form className="new-task-form" onSubmit={addTask}>
+      <form className="new-task-form">
         <div className="form-container">
-          <label className="new-task-label day" for="day-select">day:</label>
-          <select className="day-select form-input" id="day-select">
-            <option>Monday</option>
+          <label className="new-task-label day" htmlFor="day-select">day:</label>
+          <select className="day-select form-input" id="day-select" onChange={handleDayChange}>
+            <option defaultValue>Monday</option>
             <option>Tuesday</option>
             <option>Wednesday</option>
             <option>Thursday</option>
@@ -56,18 +85,18 @@ export default function App() {
           </select>
         </div>
         <div className="form-container">
-          <label className="new-task-label" for="new-task">task:</label>
-          <input className="form-input" id="new-task" placeholder="New Task" name="new-task" onChange={handleChange} value={newTask}></input>
+          <label className="new-task-label" htmlFor="new-task">task:</label>
+          <input className="form-input" id="new-task" placeholder="New Task" name="new-task" onChange={handleTaskNameChange} value={newTask.name}></input>
         </div>
         <button className="add-task">add task</button>
       </form>
       
       <main>
-        <DayCard day={"Monday"} dayBackgroundColor="#F9614E" tasksBackgroundcolor="#FDD3CB" tasks={tasks}/>
-        <DayCard day={"Tuesday"} dayBackgroundColor="#A8CBFD" tasksBackgroundcolor="#EAEEF6" tasks={taskList}/>
-        <DayCard day={"Wednesday"} dayBackgroundColor="#FDD875" tasksBackgroundcolor="#FEF2CE" tasks={taskList}/>
-        <DayCard day={"Thursday"} dayBackgroundColor="#E3AFE8" tasksBackgroundcolor="#F8E7F1" tasks={taskList}/>
-        <DayCard day={"Friday"} dayBackgroundColor="#FF914D" tasksBackgroundcolor="#FFE0CD" tasks={taskList}/>
+        <DayCard day={"Monday"} dayBackgroundColor="#F9614E" tasksBackgroundcolor="#FDD3CB"/>
+        <DayCard day={"Tuesday"} dayBackgroundColor="#A8CBFD" tasksBackgroundcolor="#EAEEF6"/>
+        <DayCard day={"Wednesday"} dayBackgroundColor="#FDD875" tasksBackgroundcolor="#FEF2CE"/>
+        <DayCard day={"Thursday"} dayBackgroundColor="#E3AFE8" tasksBackgroundcolor="#F8E7F1"/>
+        <DayCard day={"Friday"} dayBackgroundColor="#FF914D" tasksBackgroundcolor="#FFE0CD"/>
       </main>
     </div>
   );

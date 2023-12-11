@@ -12,15 +12,16 @@ export default function App() {
     isCompleted: false,
   });
 
-  const [monTaskList, setMonTaskList] = useState([]);
-  const [tuestaskList, setTuesTaskList] = useState([]);
-  const [wedTaskList, setWedTaskList] = useState([]);
-  const [thurTaskList, setThurTaskList] = useState([]);
-  const [friTaskList, setFriTaskList] = React.useState([]);
+  const [taskList, setTaskList] = useState([]);
+
+  // const [monTaskList, setMonTaskList] = useState([]);
+  // const [tuestaskList, setTuesTaskList] = useState([]);
+  // const [wedTaskList, setWedTaskList] = useState([]);
+  // const [thurTaskList, setThurTaskList] = useState([]);
+  // const [friTaskList, setFriTaskList] = React.useState([]);
 
 
   function handleTaskNameChange(event) {
-    console.log(newTask.day);
     setNewTask(prevTask => {
       return {
         ...prevTask,
@@ -38,23 +39,29 @@ export default function App() {
     })
   }
 
-  // function addTask(event) {
-  //   event.preventDefault(); //enter button work without relaoding
+  function addTask(event) {
+    event.preventDefault(); //enter button work without relaoding
+    if (newTask.taskName.trim().length == 0){
+      alert("Empty task");
+      console.log("Empty string");
+    } 
+    else {
+      setTaskList(prevTaskList => [...prevTaskList, newTask]);
+      setNewTask(prevTask => {
+        return {  
+          taskName: "",
+          day: "Monday",
+          isCompleted: false,
+        }
+      });
+    }
+  }
 
-  //   if (newTask.trim().length == 0){
-  //     console.log("Empty string");
-  //   } 
-  //   else {
-  //     setTaskList(prevTaskList => [...prevTaskList, newTask]);
-  //     setNewTask("");
-  //   }
-  // }
-
-  // const monTasks = taskList.map((task, index) => task.day == "Monday" && <TaskCard key={index} task={task}/>)
-  // const tuesTasks = taskList.map((task, index) => task.day == "Tuesday" && <TaskCard key={index} task={task}/>)
-  // const wedTasks = taskList.map((task, index) => task.day == "Wednesday" && <TaskCard key={index} task={task}/>)
-  // const thurTasks = taskList.map((task, index) => task.day == "Thursday" && <TaskCard key={index} task={task}/>)
-  // const friTasks = taskList.map((task, index) => task.day == "Friday" && <TaskCard key={index} task={task}/>)
+  const monTasks = taskList.map((task, index) => task.day == "Monday" && <TaskCard key={index} task={task.taskName}/>)
+  const tuesTasks = taskList.map((task, index) => task.day == "Tuesday" && <TaskCard key={index} task={task.taskName}/>)
+  const wedTasks = taskList.map((task, index) => task.day == "Wednesday" && <TaskCard key={index} task={task.taskName}/>)
+  const thurTasks = taskList.map((task, index) => task.day == "Thursday" && <TaskCard key={index} task={task.taskName}/>)
+  const friTasks = taskList.map((task, index) => task.day == "Friday" && <TaskCard key={index} task={task.taskName}/>)
 
   return (
     <div className="App">
@@ -71,7 +78,7 @@ export default function App() {
         </div>
       </header>
 
-      <form className="new-task-form">
+      <form className="new-task-form" onSubmit={addTask}>
         <div className="form-container">
           <label className="new-task-label day" htmlFor="day-select">day:</label>
           <select className="day-select form-input" id="day-select" onChange={handleDayChange}>
@@ -86,17 +93,17 @@ export default function App() {
         </div>
         <div className="form-container">
           <label className="new-task-label" htmlFor="new-task">task:</label>
-          <input className="form-input" id="new-task" placeholder="New Task" name="new-task" onChange={handleTaskNameChange} value={newTask.name}></input>
+          <input className="form-input" id="new-task" placeholder="New Task" name="new-task" onChange={handleTaskNameChange} value={newTask.taskName}></input>
         </div>
         <button className="add-task">add task</button>
       </form>
       
       <main>
-        <DayCard day={"Monday"} dayBackgroundColor="#F9614E" tasksBackgroundcolor="#FDD3CB"/>
-        <DayCard day={"Tuesday"} dayBackgroundColor="#A8CBFD" tasksBackgroundcolor="#EAEEF6"/>
-        <DayCard day={"Wednesday"} dayBackgroundColor="#FDD875" tasksBackgroundcolor="#FEF2CE"/>
-        <DayCard day={"Thursday"} dayBackgroundColor="#E3AFE8" tasksBackgroundcolor="#F8E7F1"/>
-        <DayCard day={"Friday"} dayBackgroundColor="#FF914D" tasksBackgroundcolor="#FFE0CD"/>
+        <DayCard day={"Monday"} dayBackgroundColor="#F9614E" tasksBackgroundcolor="#FDD3CB" tasks={monTasks}/>
+        <DayCard day={"Tuesday"} dayBackgroundColor="#A8CBFD" tasksBackgroundcolor="#EAEEF6" tasks={tuesTasks}/>
+        <DayCard day={"Wednesday"} dayBackgroundColor="#FDD875" tasksBackgroundcolor="#FEF2CE" tasks={wedTasks}/>
+        <DayCard day={"Thursday"} dayBackgroundColor="#E3AFE8" tasksBackgroundcolor="#F8E7F1" tasks={thurTasks}/>
+        <DayCard day={"Friday"} dayBackgroundColor="#FF914D" tasksBackgroundcolor="#FFE0CD" tasks={friTasks}/>
       </main>
     </div>
   );

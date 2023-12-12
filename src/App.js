@@ -10,6 +10,7 @@ export default function App() {
     taskName: "",
     day: "Monday",
     isCompleted: false,
+    id: 1
   });
 
   const [taskList, setTaskList] = useState([]);
@@ -43,18 +44,28 @@ export default function App() {
       setNewTask(prevTask => {
         return {
           ...prevTask,
+          id: prevTask.id+1,
           taskName: "",
         }
       });
     }
-    console.log(newTask.day)
   }
 
-  const monTasks = taskList.map((task, index) => task.day == "Monday" && <TaskCard key={index} task={task.taskName}/>)
-  const tuesTasks = taskList.map((task, index) => task.day == "Tuesday" && <TaskCard key={index} task={task.taskName}/>)
-  const wedTasks = taskList.map((task, index) => task.day == "Wednesday" && <TaskCard key={index} task={task.taskName}/>)
-  const thurTasks = taskList.map((task, index) => task.day == "Thursday" && <TaskCard key={index} task={task.taskName}/>)
-  const friTasks = taskList.map((task, index) => task.day == "Friday" && <TaskCard key={index} task={task.taskName}/>)
+  function completeTask(id) {
+    setTaskList(prevTaskList => {
+      return prevTaskList.map(prevTask => prevTask.id == id && {...prevTask, isCompleted: !prevTask.isCompleted})
+    })
+  }
+
+  const monTasks = taskList.map((task) => task.day == "Monday" && <TaskCard key={task.id} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
+
+  const tuesTasks = taskList.map((task, index) => task.day == "Tuesday" && <TaskCard key={index} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
+
+  const wedTasks = taskList.map((task, index) => task.day == "Wednesday" && <TaskCard key={index} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
+
+  const thurTasks = taskList.map((task, index) => task.day == "Thursday" && <TaskCard key={index} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
+
+  const friTasks = taskList.map((task, index) => task.day == "Friday" && <TaskCard key={index} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
 
   return (
     <div className="App">

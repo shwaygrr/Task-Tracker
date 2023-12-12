@@ -93,6 +93,7 @@ form button {
 form button:hover {
     background-color: #EAEEF6;
 }
+/* new task form */
 
 /* Day card */
 main {
@@ -124,13 +125,15 @@ article {
     align-items: center;
     margin-top: 40px;
 }
+/* Day card */
 
-.task-card {
-    background-color: white;
+/* Task card */
+.task-card, .task-card-complete {
     width: 90%;
     margin: 10px 0;
     text-align: center;
     padding: 15px 0;
+    background-color: white;
   }
   
   .task-card:nth-child(1) {
@@ -140,3 +143,8 @@ article {
   .task-card p {
     margin-bottom: 0;
   }
+
+  .task-card-complete, .task-card:hover {
+    background-color: #a6a6a6;
+  }
+  /* Task card */

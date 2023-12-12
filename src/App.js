@@ -14,13 +14,6 @@ export default function App() {
 
   const [taskList, setTaskList] = useState([]);
 
-  // const [monTaskList, setMonTaskList] = useState([]);
-  // const [tuestaskList, setTuesTaskList] = useState([]);
-  // const [wedTaskList, setWedTaskList] = useState([]);
-  // const [thurTaskList, setThurTaskList] = useState([]);
-  // const [friTaskList, setFriTaskList] = React.useState([]);
-
-
   function handleTaskNameChange(event) {
     setNewTask(prevTask => {
       return {
@@ -48,13 +41,13 @@ export default function App() {
     else {
       setTaskList(prevTaskList => [...prevTaskList, newTask]);
       setNewTask(prevTask => {
-        return {  
+        return {
+          ...prevTask,
           taskName: "",
-          day: "Monday",
-          isCompleted: false,
         }
       });
     }
+    console.log(newTask.day)
   }
 
   const monTasks = taskList.map((task, index) => task.day == "Monday" && <TaskCard key={index} task={task.taskName}/>)

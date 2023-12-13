@@ -148,8 +148,12 @@ article {
     margin-bottom: 0;
   }
 
-  .task-card-complete, .task-card:hover {
+  .task-card-complete {
     background-color: #a6a6a6;
+  }
+
+  .task-card:hover {
+    background-color: rgb(129, 188, 129);
   }
 
   .task-card-complete h1 {

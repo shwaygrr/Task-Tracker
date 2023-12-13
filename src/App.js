@@ -9,7 +9,7 @@ export default function App() {
   const [newTask, setNewTask] = useState({
     taskName: "",
     day: "Monday",
-    isCompleted: false,
+    isComplete: false,
     id: 1
   });
 
@@ -53,20 +53,21 @@ export default function App() {
 
   function completeTask(id) {
     setTaskList(prevTaskList => {
-      return prevTaskList.map(prevTask => prevTask.id == id && {...prevTask, isCompleted: !prevTask.isCompleted})
+      return prevTaskList.map(prevTask => prevTask.id == id ? {...prevTask, isComplete: !prevTask.isComplete} : prevTask)
     })
   }
 
-  const monTasks = taskList.map((task) => task.day == "Monday" && <TaskCard key={task.id} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
+  const monTasks = taskList.map(task => task.day == "Monday" && <TaskCard key={task.id} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
 
-  const tuesTasks = taskList.map((task, index) => task.day == "Tuesday" && <TaskCard key={index} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
+  const tuesTasks = taskList.map(task => task.day == "Tuesday" && <TaskCard key={task.id} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
 
-  const wedTasks = taskList.map((task, index) => task.day == "Wednesday" && <TaskCard key={index} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
+  const wedTasks = taskList.map(task => task.day == "Wednesday" && <TaskCard key={task.id} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
 
-  const thurTasks = taskList.map((task, index) => task.day == "Thursday" && <TaskCard key={index} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
+  const thurTasks = taskList.map(task=> task.day == "Thursday" && <TaskCard key={task.id} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
 
-  const friTasks = taskList.map((task, index) => task.day == "Friday" && <TaskCard key={index} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
+  const friTasks = taskList.map(task => task.day == "Friday" && <TaskCard key={task.id} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
 
+  console.log(taskList)
   return (
     <div className="App">
 

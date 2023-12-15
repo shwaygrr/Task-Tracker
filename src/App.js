@@ -5,7 +5,8 @@ import TaskCard from "./components/TaskCard"
 import "./styles.css"
 
 export default function App() {
-
+  
+  //form tasks
   const [newTask, setNewTask] = useState({
     taskName: "",
     day: "Monday",
@@ -13,8 +14,35 @@ export default function App() {
     id: 1
   });
 
-  const [taskList, setTaskList] = useState([]);
+  //task list object
+  const [taskLists, setTaskLists] = useState({
+    allList: [],
+    selectedList: "ALL TASKS",
+    filteredList: []
+  })
 
+  //filter functions
+  function filterList(list, filter) {
+      if (filter == "COMPLETED") {
+        return list.filter(task => task.isComplete);
+      } else if (filter == "INCOMPLETE") {
+        return list.filter(task => !task.isComplete);
+      } else {
+        return list;
+      }
+  }
+
+  function handleFilterChange(event) {
+    setTaskLists(prevTaskLists => {
+      return {
+        ...prevTaskLists,
+        selectedList: event.target.value,
+        filteredList: filterList(prevTaskLists.allList, event.target.value)
+      }
+    })
+  }
+
+  //new task functions
   function handleTaskNameChange(event) {
     setNewTask(prevTask => {
       return {
@@ -33,6 +61,7 @@ export default function App() {
     })
   }
 
+  //edit list functions
   function addTask(event) {
     event.preventDefault(); //enter button work without relaoding
     if (newTask.taskName.trim().length == 0){
@@ -40,7 +69,17 @@ export default function App() {
       console.log("Empty string");
     } 
     else {
-      setTaskList(prevTaskList => [...prevTaskList, newTask]);
+      setTaskLists(prevTaskLists => {
+        const updatedAllList = [...prevTaskLists.allList, newTask]
+        const updatedFilteredList = filterList(updatedAllList, taskLists.selectedList) 
+        return {
+          ...prevTaskLists,
+          allList: updatedAllList,
+          filteredList: updatedFilteredList
+        }
+      });
+
+      //reset form
       setNewTask(prevTask => {
         return {
           ...prevTask,
@@ -51,23 +90,28 @@ export default function App() {
     }
   }
 
-  function completeTask(id) {
-    setTaskList(prevTaskList => {
-      return prevTaskList.map(prevTask => prevTask.id == id ? {...prevTask, isComplete: !prevTask.isComplete} : prevTask)
+  function completeTask(id) { 
+    setTaskLists(prevTaskLists => {
+      const updatedAllList = prevTaskLists.allList.map(prevTask => prevTask.id == id ? {...prevTask, isComplete: !prevTask.isComplete} : prevTask);
+      const updatedSelectedList = filterList(updatedAllList, taskLists.selectedList);
+      return {
+        ...prevTaskLists,
+        allList: updatedAllList,
+        filteredList: updatedSelectedList
+      }
     })
   }
 
-  const monTasks = taskList.map(task => task.day == "Monday" && <TaskCard key={task.id} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
+  const monTasks = taskLists.filteredList.map(task => task.day == "Monday" && <TaskCard key={task.id} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
 
-  const tuesTasks = taskList.map(task => task.day == "Tuesday" && <TaskCard key={task.id} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
+  const tuesTasks = taskLists.filteredList.map(task => task.day == "Tuesday" && <TaskCard key={task.id} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
 
-  const wedTasks = taskList.map(task => task.day == "Wednesday" && <TaskCard key={task.id} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
+  const wedTasks = taskLists.filteredList.map(task => task.day == "Wednesday" && <TaskCard key={task.id} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
 
-  const thurTasks = taskList.map(task=> task.day == "Thursday" && <TaskCard key={task.id} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
+  const thurTasks = taskLists.filteredList.map(task=> task.day == "Thursday" && <TaskCard key={task.id} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
 
-  const friTasks = taskList.map(task => task.day == "Friday" && <TaskCard key={task.id} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
+  const friTasks = taskLists.filteredList.map(task => task.day == "Friday" && <TaskCard key={task.id} task={task.taskName} isComplete={task.isComplete} completeTask={() => completeTask(task.id)}/>)
 
-  console.log(taskList)
   return (
     <div className="App">
 
@@ -75,7 +119,7 @@ export default function App() {
         <h1 className="header-title">TASK TRACKER</h1>
         <div className="header-view-container">
           <label className="view-label" htmlFor="filter" >VIEW: </label>
-          <select id="filter" className="header-view-dropdown" name="filter">
+          <select id="filter" className="header-view-dropdown" name="filter" onChange={handleFilterChange}>
             <option>ALL TASKS</option>
             <option>COMPLETED</option>
             <option>INCOMPLETE</option>

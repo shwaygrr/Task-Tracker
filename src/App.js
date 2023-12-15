@@ -1,5 +1,4 @@
 import React, {useState} from "react"
-import ReactDOM from "react-dom"
 import DayCard from "./components/DayCard"
 import TaskCard from "./components/TaskCard"
 import "./styles.css"

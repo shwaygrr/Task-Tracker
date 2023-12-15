@@ -4,6 +4,10 @@
     /* border: 2px solid black; */
   }
 
+.App {
+    text-align: center;
+}
+
 body {
     background-color: #FFF9F4;
 }
@@ -95,6 +99,7 @@ form button:hover {
 }
 /* new task form */
 
+
 /* Day card */
 main {
     display: flex;
@@ -127,6 +132,8 @@ article {
 }
 /* Day card */
 
+
+
 /* Task card */
 .task-card, .task-card-complete {
     font-size: 16px;
@@ -144,7 +151,7 @@ article {
     margin-top: 40px;
   }
 
-  .task-card p, .task-card-complete p {
+  .task-card, .task-card-complete {
     margin-bottom: 0;
   }
 
@@ -156,7 +163,7 @@ article {
     background-color: rgb(129, 188, 129);
   }
 
-  .task-card-complete h1 {
+  .task-card-complete p {
     text-decoration: line-through;
   }
   /* Task card */

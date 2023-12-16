@@ -41,24 +41,17 @@ export default function App() {
     })
   }
 
-  //new task functions
-  function handleTaskNameChange(event) {
-    setNewTask(prevTask => {
-      return {
-        ...prevTask,
-        taskName: event.target.value
-      }
-    })
+  //new task event handler
+
+  function handleNewTaskChange(event) {
+    const {name, value} = event.target
+
+    setNewTask(prevTask => ({
+      ...prevTask,
+      [name]: value
+    }))
   }
 
-  function handleDayChange(event) {
-    setNewTask(prevTask => {
-      return {
-        ...prevTask,
-        day: event.target.value
-      }
-    })
-  }
 
   //edit list functions
   function addTask(event) {
@@ -129,7 +122,7 @@ export default function App() {
       <form className="new-task-form" onSubmit={addTask}>
         <div className="form-container">
           <label className="new-task-label day" htmlFor="day-select">day:</label>
-          <select className="day-select form-input" id="day-select" onChange={handleDayChange}>
+          <select className="day-select form-input" id="day-select" name="day" onChange={handleNewTaskChange} value={newTask.day}>
             <option defaultValue>Monday</option>
             <option>Tuesday</option>
             <option>Wednesday</option>
@@ -141,7 +134,7 @@ export default function App() {
         </div>
         <div className="form-container">
           <label className="new-task-label" htmlFor="new-task">task:</label>
-          <input className="form-input" id="new-task" placeholder="New Task" name="new-task" onChange={handleTaskNameChange} value={newTask.taskName}></input>
+          <input className="form-input" id="new-task" placeholder="New Task" name="taskName" onChange={handleNewTaskChange} value={newTask.taskName}></input>
         </div>
         <button className="add-task">add task</button>
       </form>

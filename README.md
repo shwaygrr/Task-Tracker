@@ -10,17 +10,16 @@ User Interface inspired by https://github.com/turingschool-examples/task-tracker
 - Add Task: Allow users to add new tasks with a form.
 - Delete Task: Implement functionality to delete tasks.
 - Toggle Task Status: Users can mark tasks as completed or incomplete.
-- Task Counter: Show the total number of tasks and the number of completed tasks.
-- Styling: Use CSS or a CSS framework (e.g., Bootstrap) for a visually appealing interface.
+- Styling: Use CSS for visually appealing interface.
 
 ## Technologies Used
 
 - React
 - State Management (React State or Context API)
-- React Hooks (useState, useEffect, etc.)
+- React Hooks (useState)
 - Conditional Rendering
 - Event Handling
-- CSS (or a CSS framework like Bootstrap)
+- CSS
 
 ## Getting Started
 

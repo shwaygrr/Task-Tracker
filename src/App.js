@@ -1,5 +1,7 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import { nanoid } from 'nanoid'
+import { onSnapshot } from "firebase/firestore"
+import { tasksCollection } from "./firebase"
 import DayCard from "./components/DayCard"
 import TaskCard from "./components/TaskCard"
 import "./styles.css"
@@ -43,7 +45,6 @@ export default function App() {
   }
 
   //new task event handler
-
   function handleNewTaskChange(event) {
     const {name, value} = event.target
 
@@ -55,6 +56,16 @@ export default function App() {
 
 
   //edit list functions
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(tasksCollection, snapshot => {
+      //sync up  local tasks array with the snapshot data
+      console.log("yayyyyyyy")
+    })
+
+    return unsubscribe
+  }, [taskLists])
+
   function addTask(event) {
     event.preventDefault(); //enter button work without relaoding
     if (newTask.taskName.trim().length === 0){
